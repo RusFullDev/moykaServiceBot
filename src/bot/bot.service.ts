@@ -91,4 +91,29 @@ async start(ctx:Context){
 }
   }  
   
+
+  async onStop(ctx:Context){
+    const userId = ctx.from.id
+    const user = await this.botRepo.findOne({where:{user_id:userId}})
+  
+  if(!user){
+    await ctx.reply(
+      `Siz avval ro'xatdan o'tmagansiz <b> "/start"</b> tugmasini bosing!`,
+      {
+        parse_mode:'HTML',
+        ...Markup.keyboard([
+          ["/start"]
+        ]).oneTime().resize()
+      })
+    }else{
+      await this.botRepo.update({status:false,phone_number:null},{where:{user_id:userId}})
+      await ctx.reply(`Siz botdan chiqdingiz.Qayta foydalanish uchun <b> "/start"</b> tugmasini bosing!`,
+      {
+        parse_mode:'HTML',
+        ...Markup.keyboard([
+          ["/start"]
+        ]).oneTime().resize()
+      })
+    }
+  }
 }

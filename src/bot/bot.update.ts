@@ -16,6 +16,10 @@ export class BotUpdate {
 await this.botService.onContact(ctx)
   }
 
+  @Command('stop')
+  async onStop(@Ctx() ctx:Context){
+    await this.botService.onStop(ctx)
+  }
 
 
 }
