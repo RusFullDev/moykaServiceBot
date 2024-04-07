@@ -1,1 +1,1 @@
-export const BOT_NAME = 'Stadium verify bot'
+export const BOT_NAME = 'Service control bot'

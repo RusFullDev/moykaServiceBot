@@ -1,0 +1,99 @@
+
+@Command('inline_keyboard')
+async inlineButton(@Ctx() ctx:Context){
+const inlineKeyboard = [
+    [
+        {
+        text:'Button 1',callback_data:"Button1"
+    },
+    {
+        text:'Button 2',callback_data:"Button2"
+    },
+    {
+        text:'Button 3',callback_data:"Button3"
+    }
+],
+    [
+        {
+            text:'Button 4',callback_data:"Button4"
+        },
+        {
+            text:'Button 5',callback_data:"Button5"
+        }
+    ]
+]
+ctx.reply('Inline buttonni tanlang:',{
+    reply_markup:{
+        inline_keyboard:inlineKeyboard
+    },
+})
+}
+
+@Action('Button1')
+async actionButton1(@Ctx() ctx:Context){
+    await ctx.reply("Button 1 bosildi")
+}
+
+@Action('Button2')
+async actionButton2(@Ctx() ctx:Context){
+    await ctx.reply("Button 2 bosildi")
+}
+@Action('Button3')
+async actionButton3(@Ctx() ctx:Context){
+    await ctx.reply("Button 3 bosildi")
+}
+@Action('Button4')
+async actionButton4(@Ctx() ctx:Context){
+    await ctx.reply("Button 4 bosildi")
+}
+
+@Command("main_keyboard")
+async mainButton(@Ctx() ctx:Context){
+    await ctx.reply('Main buttondi tanla',{
+parse_mode:'HTML',
+...Markup.keyboard(
+    [['button1','button2','button3'],
+    ['button4','button5'],
+[
+     @Column({
+        type:DataType.STRING
+    }),
+    Markup.button.locationRequest('📍Lokatsiyani yuboring'),
+
+]
+]
+).resize()
+    })
+}
+@Hears('button1')
+async hears(@Ctx() ctx:Context){
+    await ctx.reply('Button 1 bosildi')
+}
+
+@Command('help')
+async commandHelp(@Ctx() ctx:Context){
+    await ctx.reply("Help commandasi")
+}
+
+   @On('text')
+   async onEcho(@Ctx() ctx:Context){
+    console.log(ctx.botInfo);
+    console.log(ctx.chat.id);
+    console.log(ctx.from.first_name);
+     if ('text' in ctx.message) {
+      if (ctx.message.text == 'Assalamu alaykum') {
+        await ctx.replyWithHTML('<b> Va alaykum assalamu </b>');
+      } else {
+        await ctx.replyWithHTML(ctx.message.text);
+      }
+    }
+  }
+
+  
+  @On('message')
+  async onMessage(@Ctx() ctx: Context) {
+    console.log(ctx.botInfo);
+    console.log(ctx.chat.id);
+    console.log(ctx.from.first_name);
+  }
+
