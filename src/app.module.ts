@@ -5,7 +5,8 @@ import { TelegrafModule } from 'nestjs-telegraf';
 import { BOT_NAME } from 'add.constanta';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Bot } from './bot/model/bot.model';
-import { WorkerModule } from './worker/worker.module';
+import { AvtoModule } from './avto/avto.module';
+
 
 @Module({
   imports: [ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }), BotModule,
@@ -30,7 +31,8 @@ sync:{alter:true},
 logging:false
 }),
       BotModule,
-      WorkerModule
+      AvtoModule,
+
 
   ],
   controllers: [],

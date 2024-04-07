@@ -10,4 +10,12 @@ export class BotUpdate {
    async onStart(@Ctx() ctx:Context){
    this.botService.start(ctx)
    } 
+
+   @On('contact')
+  async onContact(@Ctx() ctx:Context){
+await this.botService.onContact(ctx)
+  }
+
+
+
 }
