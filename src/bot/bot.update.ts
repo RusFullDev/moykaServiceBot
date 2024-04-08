@@ -11,6 +11,11 @@ export class BotUpdate {
    this.botService.start(ctx)
    } 
 
+   @Hears('👷worker')
+   async start2(@Ctx() ctx:Context){
+    await this.botService.worker(ctx)
+   }
+
    @On('contact')
   async onContact(@Ctx() ctx:Context){
 await this.botService.onContact(ctx)

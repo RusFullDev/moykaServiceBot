@@ -13,7 +13,25 @@ export class BotService {
 @InjectBot(BOT_NAME) private readonly bot:Telegraf<Context>
 ){}
   
-async start(ctx:Context){
+
+async start(@Ctx() ctx:Context){
+await ctx.reply(`Assalomu alaukum ${ctx.from.first_name}.Ro'xatdan o'tish uchun pastdagi tugmalardan birini tanlang !`,
+{
+  parse_mode:'HTML',
+  ...Markup.keyboard(
+      [
+        ["👷worker",
+        '👨‍💼owner',
+        '👨‍🦱client'],
+      ['ℹ️Info',
+      '📲contact us','📍our address'],
+   ]
+  ).resize()
+      })
+
+}
+
+async worker(ctx:Context){
   const userId = ctx.from.id
   const user = await this.botRepo.findOne({where:{user_id:userId}})
   if(!user){
@@ -44,7 +62,8 @@ async start(ctx:Context){
         })
   }else{
     await ctx.reply(
-      `Bu bot orqali moyka servicedan royxatdan otasiz`,{
+      `Bu bot orqali moyka servicedan royxatdan otasiz`,
+      {
         parse_mode:'HTML',
         ...Markup.removeKeyboard()
       }
